@@ -17,12 +17,12 @@ def main(requirements_file):
 
     for (i, collection) in enumerate(data['collections']):
         namespace, name = collection['name'].split('.')
-        url = f'https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/index/{ namespace }/{ name}/'
+        url = f'https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/index/{ namespace }/{ name }/'
         r = requests.get(url)
         highest_version = r.json()['highest_version']['version']
         data['collections'][i]['version'] = highest_version
 
-    with open('requirements.yml', 'w') as file:
+    with open(requirements_file, 'w') as file:
         yaml.dump(data, file)
 
 
